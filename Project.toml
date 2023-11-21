@@ -1,0 +1,13 @@
+name = "PhyloClustering"
+uuid = "2e4ec7c6-185f-4bfd-8419-ce336ea983f6"
+authors = ["Yibo Kong <k825379114@gmail.com> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
