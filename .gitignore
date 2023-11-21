@@ -147,3 +147,7 @@ Backup[ ]of[ ]*.numbers/
 
 ### Jupyter notebook
 .ipynb_checkpoints/
+
+###data
+*.trees
+*.tree
