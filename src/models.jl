@@ -1,19 +1,29 @@
 using MultivariateStats, StatsBase, GaussianMixtures, ParallelKMeans, MLBase, Hungarian, LinearAlgebra
 
 """
-    Function to get predicted labels from K-means clustering
+    Function to get predicted labels from Yinyang K-means clustering
     Input:
-        tree: DataFrame object with the concordance factor table (first 4 columns should be taxon names, last 3 columns should be cf values)
+        tree: a B * N tree matrix (each column of tree matrix is a B-dimensional tree in bipartiton format)
         n: the number of clusters
-        seed: 
+        init: initialization method. K-means++ or rand
     output:
-        top m optimal phylogenetic networks in a Dict object
+        a Vector object with length of N containing the predicted label of each tree (the cluster it belongs to)
 """
-function kmeans_label(tree, n; seed =:"k-means++")  
-    result = ParallelKMeans.kmeans(Yinyang(),tree, n; k_init ="k-means++")
+function kmeans_label(tree, n; init=:"k-means++")  
+    result = ParallelKMeans.kmeans(Yinyang(), tree, n; k_init =init)
     return result.assignments
 end
 
+"""
+    Function to get predicted labels from Gaussian mixture model.
+    Input:
+        tree: a B * N tree matrix (each column of tree matrix is a B-dimensional tree in bipartiton format)
+        n: the number of clusters
+        method: intialization method to find n starting centers
+        kind: covariance type
+    output:
+        a Vector object with length of N containing the predicted label of each tree (the cluster it belongs to)
+"""
 function GMM_label(tree, n; method=:kmeans, kind=:diag)    
     data= tree'
     gmm=GMM(n,Array(data),method=method, kind=kind);
@@ -21,7 +31,7 @@ function GMM_label(tree, n; method=:kmeans, kind=:diag)
     llpg = gmmposterior(gmm,Array(data))[2]
     llpg_result = map(argmax, eachrow(llpg))
     prob_result = map(argmax, eachrow(prob_pos))
-    return Pair(llpg_result, prob_result)
+    return prob_result, llpg_result
 end
 
 function hc_label(matrix, n; linkage=:ward)
