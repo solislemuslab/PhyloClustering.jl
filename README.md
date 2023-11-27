@@ -1,6 +1,6 @@
 # PhyloClustering.jl
 
-[![Build Status](https://github.com/Yibo Kong/ml-phylo-trees/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/Yibo Kong/ml-phylo-trees/actions/workflows/CI.yml?query=branch%3Amaster)
+[![Build Status](https://github.com/YiboK/ml-phylo-trees/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/YiboK/ml-phylo-trees/actions/workflows/CI.yml?query=branch%3Amaster)
 
 
 ## License
