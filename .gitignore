@@ -151,3 +151,4 @@ Backup[ ]of[ ]*.numbers/
 ###data
 *.trees
 *.tree
+Manifest.toml

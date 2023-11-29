@@ -20,14 +20,14 @@ end;
         stop: the ending index
     output:
         the bipartiions of trees with n taxa between start index and stop index
-        Example:
-        show_bipartitions(4,stop = 4):
-            idx	partition
-            0	1 | 2 3 4 
-            1	2 | 1 3 4 
-            2	3 | 1 2 4 
-            3	4 | 1 2 3 
-            4	1 2 | 3 4 
+    Example:
+    show_bipartitions(4,stop = 4):
+        idx	partition
+        0	1 | 2 3 4 
+        1	2 | 1 3 4 
+        2	3 | 1 2 4 
+        3	4 | 1 2 3 
+        4	1 2 | 3 4 
 """
 function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
     idx_width = length(string(num_bipartitions(n)))
@@ -104,22 +104,22 @@ end
         n: the number of taxa of the tree
     output:
         a Vector of pairs shows the tree in bipartiton format
-        Example:
-            tree:
-                HybridNetwork, Rooted Network
-                6 edges
-                7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
-                tip labels: 4, 1, 2, 3
-                (4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);
+    Example:
+        tree:
+            HybridNetwork, Rooted Network
+            6 edges
+            7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
+            tip labels: 4, 1, 2, 3
+            (4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);
 
-            get_bipartition(tree, 4):
-                6-element Vector{Any}:
-                    3 => 4.249
-                    0 => 2.457
-                    1 => 2.064
-                    2 => 2.064
-                    6 => 0.393
-                    3 => 1.793
+        get_bipartition(tree, 4):
+            6-element Vector{Any}:
+                3 => 4.249
+                0 => 2.457
+                1 => 2.064
+                2 => 2.064
+                6 => 0.393
+                3 => 1.793
 """
 function get_bipartition(tree::HybridNetwork, n::Int64)
     taxa = sort(tipLabels(tree))
@@ -170,17 +170,17 @@ end
         n: the number of taxa of the trees
     output:
         a Matrix shows the tree in bipartiton format
-        Example:
-            tree:
-                HybridNetwork, Rooted Network
-                6 edges
-                7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
-                tip labels: 4, 1, 2, 3
-                (4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);
+    Example:
+        tree:
+            HybridNetwork, Rooted Network
+            6 edges
+            7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
+            tip labels: 4, 1, 2, 3
+            (4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);
 
-            print_bipartition([tree], 4)
-                1*7 Matrix{Float64}:
-                2.457  2.064  2.064  6.042  0.0  0.0  0.393
+        print_bipartition([tree], 4)
+            1*7 Matrix{Float64}:
+            2.457  2.064  2.064  6.042  0.0  0.0  0.393
 """
 function print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
     
@@ -203,26 +203,25 @@ end
 """
     Function to obtain a table that contains taxon numbers and their names 
     Input:
-        trees: a Vector of HybridNetwork objects that contains trees
-        n: the number of taxa of the trees
+        trees: a HybridNetwork objects that contains trees
     output:
         a Dictionary shows taxon numbers and their names
-        Example:
-            tree:
-                HybridNetwork, Rooted Network
-                6 edges
-                7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
-                tip labels: O, HYB, P1, P2
-                (O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);
+    Example:
+        tree:
+            HybridNetwork, Rooted Network
+            6 edges
+            7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
+            tip labels: O, HYB, P1, P2
+            (O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);
 
-            print_bipartition([tree], 4)
-                Dict{Int64, Any} with 4 entries:
-                4 => "P2"
-                2 => "O"
-                3 => "P1"
-                1 => "HYB"
+        print_bipartition([tree], 4)
+            Dict{Int64, Any} with 4 entries:
+            4 => "P2"
+            2 => "O"
+            3 => "P1"
+            1 => "HYB"
 """
-function num_to_name(tree::Vector{HybridNetwork})
+function num_to_name(tree::HybridNetwork)
     taxa = sort(tipLabels(tree))
     dict = Dict{Int64, Any}()
     for i in 1:length(taxa)

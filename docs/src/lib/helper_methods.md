@@ -32,7 +32,7 @@ standardize_tree(tree::AbstractMatrix{<:Real})
 ```
 
 ```@docs
-num_to_name(tree::Vector{HybridNetwork})
+num_to_name(tree::HybridNetwork)
 ```
 
 ```@docs
