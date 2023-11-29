@@ -51,7 +51,7 @@ function hc_label(matrix::AbstractMatrix{<:Real}, n::Int64; linkage::Symbol=:war
 end
 
 """
-    Function to get predicted labels from hierarchical clustering.
+    Function to get predicted labels from density-based spatial clustering of applications with noise.
     Input:
         tree: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format) and B < N
         radius: neighborhood radius; points within this distance are considered neighbors
@@ -59,6 +59,7 @@ end
         min_cluster_size: minimal number of points in a cluster
     output:
         a Vector object with length of N containing predicted labels for each tree (the cluster it belongs to) 
+        0 means the tree is noise
 """
 function dbscan_label(tree::AbstractMatrix{<:Real}, radius::Real; min_neighbors::Int64 = 1, min_cluster_size::Int64 = 1)   
     result = dbscan(tree, radius,min_neighbors = min_neighbors, min_cluster_size = min_cluster_size)   
