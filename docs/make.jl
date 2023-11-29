@@ -5,18 +5,23 @@ makedocs(
     authors="Yibo Kong, Claudia Solís-Lemus, and contributors",
     modules=[PhyloClustering],
     format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
+    checkdocs=:exports,
     pages = [
         "Home" => "index.md",
-        "Manual" => [
-            "Installation" => "man/installation.md",
-            "Implementation" => "man/implementation.md",
+        "Installation" => "man/installation.md",
+        "Models" => [
+            "model/basic.md",
+            "model/kmeans.md",
+            "model/hclust.md",
+            "model/dbscan.md",
+            "model/gmm.md",
         ],
         "Library" => [
-            "Public Methods" => "lib/public_methods.md",
+            "Helper Methods" => "lib/helper_methods.md",
         ]
     ]
 )
 
 deploydocs(
-    # repo = "github.com/solislemuslab/PhyloDiamond.jl.git",
+    repo = "github.com/solislemuslab/ml-phylo-trees",
 )

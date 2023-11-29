@@ -26,7 +26,7 @@ end
         a vector tuple where the first vector contains predicted labels for each tree based on the posterior probability and
         the second vector contain predicted labels for each tree based on the Log Likelihood 
 """
-function gmm_label(tree::AbstractMatrix{<:Real}, n::Int64; method::Symbol=:kmeans, kind::Symbol=:diag)  
+function gmm_label(tree::AbstractMatrix{<:Real}, n::Int64; method::Symbol=:kmeans, kind::Symbol=:diag)
     data= Matrix(tree');
     gmm= GMM(n,data,method=method, kind=kind);
     prob_pos=gmmposterior(gmm,data)[1]
