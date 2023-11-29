@@ -1,4 +1,4 @@
-using Clustering, GaussianMixtures, ParallelKMeans
+using Clustering, GaussianMixtures, ParallelKMeans, Random
 
 """
     Function to get predicted labels from Yinyang K-means clustering
@@ -6,11 +6,12 @@ using Clustering, GaussianMixtures, ParallelKMeans
         tree: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format)
         n: the number of clusters
         init: initialization method. K-means++ or rand
+        rng: 
     output:
         a Vector object with length of N containing predicted labels for each tree
 """
-function kmeans_label(tree::AbstractMatrix{<:Real}, n::Int64; init::String="k-means++")  
-    result = ParallelKMeans.kmeans(Yinyang(), tree, n; k_init =init)
+function kmeans_label(tree::AbstractMatrix{<:Real}, n::Int64; init::String="k-means++", rng::AbstractRNG=Random.GLOBAL_RNG)  
+    result = ParallelKMeans.kmeans(Yinyang(), tree, n; k_init =init, rng=rng)
     return result.assignments
 end
 
@@ -52,7 +53,7 @@ end
 """
     Function to get predicted labels from hierarchical clustering.
     Input:
-        tree: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format)
+        tree: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format) and B < N
         radius: neighborhood radius; points within this distance are considered neighbors
         min_neighbors: minimal number of neighbors required to assign a point to a cluster
         min_cluster_size: minimal number of points in a cluster
@@ -62,14 +63,5 @@ end
 function dbscan_label(tree::AbstractMatrix{<:Real}, radius::Real; min_neighbors::Int64 = 1, min_cluster_size::Int64 = 1)   
     result = dbscan(tree, radius,min_neighbors = min_neighbors, min_cluster_size = min_cluster_size)   
     # get only points in clusters
-    result = getproperty.(result, :core_indices)
-    idx = fill(0,length(tree[1,:]))
-    for i in range(1, length(idx))
-        if i in result[1]
-            idx[i] = 1
-        elseif i in result[2]
-            idx[i] = 2
-        end
-    end
-    return idx
+    return result.assignments
 end
