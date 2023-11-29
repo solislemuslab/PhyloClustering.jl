@@ -1,0 +1,3 @@
+```@docs
+gmm_label
+```

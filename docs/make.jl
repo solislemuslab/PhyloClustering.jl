@@ -7,16 +7,20 @@ makedocs(
     format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
     pages = [
         "Home" => "index.md",
-        "Manual" => [
-            "Installation" => "man/installation.md",
-            "Implementation" => "man/implementation.md",
+        "Installation" => "man/installation.md",
+        "models" => [
+            "model/basic.md",
+            "model/kmeans.md",
+            "model/hclust.md",
+            "model/dbscan.md",
+            "model/gmm.md",
         ],
         "Library" => [
-            "Public Methods" => "lib/public_methods.md",
+            "Helper Methods" => "lib/helper_methods.md",
         ]
     ]
 )
 
 deploydocs(
-    # repo = "github.com/solislemuslab/PhyloDiamond.jl.git",
+    repo = "github.com/solislemuslab/ml-phylo-trees",
 )
