@@ -11,15 +11,19 @@ For reporting a bug or a failed function or requesting a new feature, you can si
 To make contributions to `PhyloClustering.jl`, you need to set up your [GitHub](https://github.com) 
 account if you do not have and sign in, and request your change(s) or contribution(s) via 
 a pull request against the ``develop``
-branch of the [PhyloClustering.jl repository](https://github.com/solislemuslab/ml-phylo-trees). 
+branch of the [PhyloClustering.jl repository](https://github.com/solislemuslab/PhyloClustering.jl
+). 
 
 Please use the following steps:
 
-1. Open a new issue for new feature or failed function in the [issue tracker](https://github.com/solislemuslab/ml-phylo-trees/issues)
-2. Fork the [PhyloClustering.jl repository](https://github.com/solislemuslab/ml-phylo-trees) to your GitHub account
+1. Open a new issue for new feature or failed function in the [issue tracker](https://github.com/solislemuslab/PhyloClustering.jl
+/issues)
+2. Fork the [PhyloClustering.jl repository](https://github.com/solislemuslab/PhyloClustering.jl
+) to your GitHub account
 3. Clone your fork locally:
 ```
-$ git clone https://github.com/your-username/ml-phylo-trees.git
+$ git clone https://github.com/your-username/PhyloClustering.jl
+.git
 ```   
 4. Make your change(s) in the `master` (or `development`) branch of your cloned fork
 5. Make sure that all tests (`test/runtests.jl`) are passed without any errors
@@ -32,7 +36,9 @@ Make sure to include the following information in your pull request:
 
 * **Code** which you are contributing to this package
 
-* **Documentation** of this code if it provides new functionality. This should be a description of new functionality added to the [docs](https://solislemuslab.github.io/ml-phylo-trees/dev/). Check out the [docs folder](https://github.com/solislemuslab/ml-phylo-trees.jl/tree/main/docs) for instructions on how to update the documentation.
+* **Documentation** of this code if it provides new functionality. This should be a description of new functionality added to the [docs](https://solislemuslab.github.io/PhyloClustering.jl
+/dev/). Check out the [docs folder](https://github.com/solislemuslab/PhyloClustering.jl
+.jl/tree/main/docs) for instructions on how to update the documentation.
 
 - **Tests** of this code to make sure that the previously failed function or the new functionality now works properly
 

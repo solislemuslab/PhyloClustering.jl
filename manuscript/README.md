@@ -1,4 +1,4 @@
-# ml-phylo-trees
+# PhyloClustering
 
 ## Data
 
