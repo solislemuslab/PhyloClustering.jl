@@ -23,5 +23,5 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/solislemuslab/ml-phylo-trees",
+    repo = "github.com/solislemuslab/PhyloClustering.jl",
 )
