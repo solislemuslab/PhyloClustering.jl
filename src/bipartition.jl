@@ -163,6 +163,8 @@ end
 
 """
     Function to get the bipartition format of phylogenetic trees in Matrix
+    Note that all taxa will be replaced by numbers. Use the function num_to_name to 
+    get a Dictionary containing the name of the taxon corresponding to the number
     Input:
         trees: a Vector of HybridNetwork objects that contains trees
         n: the number of taxa of the trees
@@ -188,12 +190,43 @@ function print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
     treeNum = 1;
     # get existing index
     
-    for i in trees
-        bipart = get_bipartition(i, n)
+    for tree in trees
+        bipart = get_bipartition(tree, n)
         for j in 1:length(bipart)
             data[treeNum,(bipart[j][1] + 1)] += bipart[j][2]
         end
         treeNum+=1
     end
     return data
+end
+
+"""
+    Function to obtain a table that contains taxon numbers and their names 
+    Input:
+        trees: a Vector of HybridNetwork objects that contains trees
+        n: the number of taxa of the trees
+    output:
+        a Dictionary shows taxon numbers and their names
+        Example:
+            tree:
+                HybridNetwork, Rooted Network
+                6 edges
+                7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
+                tip labels: O, HYB, P1, P2
+                (O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);
+
+            print_bipartition([tree], 4)
+                Dict{Int64, Any} with 4 entries:
+                4 => "P2"
+                2 => "O"
+                3 => "P1"
+                1 => "HYB"
+"""
+function num_to_name(tree)
+    taxa = sort(tipLabels(tree))
+    dict = Dict{Int64, Any}()
+    for i in 1:length(taxa)
+        dict[i] = taxa[i]
+    end
+    return dict
 end
