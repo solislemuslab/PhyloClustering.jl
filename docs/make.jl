@@ -5,10 +5,11 @@ makedocs(
     authors="Yibo Kong, Claudia Solís-Lemus, and contributors",
     modules=[PhyloClustering],
     format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
+    checkdocs=:exports,
     pages = [
         "Home" => "index.md",
         "Installation" => "man/installation.md",
-        "models" => [
+        "Models" => [
             "model/basic.md",
             "model/kmeans.md",
             "model/hclust.md",

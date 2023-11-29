@@ -8,13 +8,9 @@ The `hclust` function implements several classical algorithms for hierarchical
 clustering (the algorithm to use is defined by the `linkage` parameter):
 
 ```@docs
-hc_label
+hc_label(matrix::AbstractMatrix{<:Real}, n::Int64; linkage::Symbol=:ward)
 ```
 
 Single-linkage clustering using distance matrix:
 ```@example
-using Clustering
-D = rand(1000, 1000);
-D += D'; # symmetric distance matrix (optional)
-result = hclust(D, linkage=:single)
 ```

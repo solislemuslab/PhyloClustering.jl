@@ -222,7 +222,7 @@ end
                 3 => "P1"
                 1 => "HYB"
 """
-function num_to_name(tree)
+function num_to_name(tree::Vector{HybridNetwork})
     taxa = sort(tipLabels(tree))
     dict = Dict{Int64, Any}()
     for i in 1:length(taxa)
