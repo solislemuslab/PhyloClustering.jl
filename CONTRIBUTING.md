@@ -16,8 +16,7 @@ branch of the [PhyloClustering.jl repository](https://github.com/solislemuslab/P
 
 Please use the following steps:
 
-1. Open a new issue for new feature or failed function in the [issue tracker](https://github.com/solislemuslab/PhyloClustering.jl
-/issues)
+1. Open a new issue for new feature or failed function in the [issue tracker](https://github.com/solislemuslab/PhyloClustering.jl/issues)
 2. Fork the [PhyloClustering.jl repository](https://github.com/solislemuslab/PhyloClustering.jl
 ) to your GitHub account
 3. Clone your fork locally:
