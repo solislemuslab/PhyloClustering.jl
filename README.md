@@ -19,7 +19,33 @@ To install the package, type inside Julia:
 ]
 add PhyloClustering
 ```
+## Help and errors
+
+To get help, check the documentation [here](https://solislemuslab.github.io/PhyloClustering.jl/dev). Please report any bugs and errors by opening an
+[issue](https://github.com/solislemuslab/PhyloClustering.jl/issues/new).
+
+## Scripts
+
+To check or get all the original data from tests, check the GitHub repository [here](https://github.com/YiboK/PhyloClustering-scripts).
+
+## Citation
+
+If you use `PhyloClustering.jl` in your work, we kindly ask that you cite the following paper: 
+```
+@article{kong_solis-lemus_2023,
+author = {Kong, Y. and Sol'{i}s-Lemus, C.},
+year = {2023},
+title = {{Unsupervised learning of phylogenetic trees via split-weight embedding}},
+url={Scheduled for upload to arXiv in December 2023}
+}
+```
+
 ## License
 
 `PhyloClustering.jl` is licensed under a
 [MIT License](https://github.com/solislemuslab/PhyloClustering.jl/blob/master/LICENSE).
+
+## Contributions
+
+Users interested in expanding functionalities in `PhyloClustering.jl` are welcome to do so. See details on how to contribute in [CONTRIBUTING.md](https://github.com/solislemuslab/PhyloClustering.jl/blob/master/CONTRIBUTING.md).
+
