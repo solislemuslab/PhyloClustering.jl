@@ -21,8 +21,7 @@ Please use the following steps:
 ) to your GitHub account
 3. Clone your fork locally:
 ```
-$ git clone https://github.com/your-username/PhyloClustering.jl
-.git
+$ git clone https://github.com/your-username/PhyloClustering.jl.git
 ```   
 4. Make your change(s) in the `master` (or `development`) branch of your cloned fork
 5. Make sure that all tests (`test/runtests.jl`) are passed without any errors
