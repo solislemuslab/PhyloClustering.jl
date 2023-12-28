@@ -1,3 +1,5 @@
+__precompile__()
+
 module PhyloClustering
     include("bipartition.jl")
     include("helper.jl")
@@ -15,5 +17,6 @@ module PhyloClustering
         show_bipartitions,
         show_bipartition,
         get_bipartition,
-        print_bipartition
+        print_bipartition,
+        num_to_name
 end

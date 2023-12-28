@@ -14,7 +14,7 @@ Here, ``\boldsymbol{\mu}_k`` is the center of the ``k``-th cluster, and
 ``z_i`` is an index of the cluster for ``i``-th point ``\mathbf{x}_i``.
 
 ```@docs
-kmeans_label(tree::AbstractMatrix{<:Real}, n::Int64; init::String="k-means++", rng::AbstractRNG=Random.GLOBAL_RNG)
+kmeans_label
 ```
 
 ## Examples

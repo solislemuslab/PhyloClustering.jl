@@ -1,40 +1,20 @@
-```@meta
-CurrentModule = PhyloClustering
+# Embed trees into Euclidean space from Newick format
+```@docs
+num_bipartitions
+show_bipartitions
+show_bipartition
+get_bipartition
+print_bipartition
+num_to_name
 ```
 
-# Convert trees in Newick format to bipartition format
+# Pre-process data before input models
 ```@docs
-num_bipartitions(n::Int64)
+standardize_tree
+distance
 ```
 
+# Visualize results
 ```@docs
-show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
-```
-
-```@docs
-show_bipartition(n::Int64, idx::Int64)
-```
-
-```@docs
-plot_clusters(tree::AbstractMatrix{<:Real}, label::Vector{Int64})
-```
-
-```@docs
-get_bipartition(tree::HybridNetwork, n::Int64)
-```
-
-```@docs
-print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
-```
-
-```@docs
-standardize_tree(tree::AbstractMatrix{<:Real}) 
-```
-
-```@docs
-num_to_name(tree::HybridNetwork)
-```
-
-```@docs
-distance(tree::AbstractMatrix{<:Real})
+plot_clusters
 ```
