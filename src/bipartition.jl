@@ -1,14 +1,14 @@
 using PhyloNetworks, Combinatorics, Formatting
 
 """
-        num_bipartitions(n::Int64)
+    num_bipartitions(n::Int64)
 
-    Function to get number of bipartitions.
+Function to get number of bipartitions.
 
-    # Arguments
-        - `n`: the number of taxa.
-    # Output:
-        The number of bipartition corresponding to the number of taxa.
+# Arguments
+ - `n`: the number of taxa.
+# Output:
+ The number of bipartition corresponding to the number of taxa.
 """
 function num_bipartitions(n::Int64)
     return 2^(n-1) - 1
@@ -16,24 +16,27 @@ end;
 
 
 """
-        show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
+    show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
 
-    Function to show the bipartitions between certain indices of the number of taxa.
+Function to show the bipartitions between certain indices of the number of taxa.
 
-    # Arguments
-        `n`: the number of taxa
-        `start`(defaults to `0`): the starting index.
-        `stop`(defaults to `-1`): the ending index.
-    # Output
-        The bipartiions of trees with n taxa between start index and stop index.
-    # Example
-    show_bipartitions(4,stop = 4):
-        idx	partition
-        0	1 | 2 3 4 
-        1	2 | 1 3 4 
-        2	3 | 1 2 4 
-        3	4 | 1 2 3 
-        4	1 2 | 3 4 
+# Arguments
+ - `n`: the number of taxa
+ - `start`(defaults to `0`): the starting index.
+ - `stop`(defaults to `-1`): the ending index.
+# Output
+ The bipartiions of trees with `n` taxa between `start` index and `stop` index.
+# Example
+
+```jldoctest
+julia> show_bipartitions(4,stop = 4)
+idx\tpartition
+0\t1 | 2 3 4 
+1\t2 | 1 3 4 
+2\t3 | 1 2 4 
+3\t4 | 1 2 3 
+4\t1 2 | 3 4 
+```
 """
 function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
     idx_width = length(string(num_bipartitions(n)))
@@ -71,30 +74,34 @@ function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
 end;
 
 """
-        show_bipartition(n::Int64, idx::Int64)
+    show_bipartition(n::Int64, idx::Int64)
 
-    Function to show the bipartition with a given index of the number of taxa.
+Function to show the bipartition with a given index of the number of taxa.
 
-    # Arguments
-        n: the number of taxa
-        idx: the bipartition to show
-    # Output
-        the idx-th bipartiion of trees with n taxa
-        Example:
-        show_bipartition(4, 3):
-            idx	partition
-            3	4 | 1 2 3 
+# Arguments
+ - `n`: the number of taxa.
+ - `idx`: the bipartition to show.
+# Output
+ The `idx`-th bipartiion of trees with `n` taxa.
+# Example:
+
+```jldoctest
+julia> show_bipartition(4, 3)
+idx\tpartition
+3\t4 | 1 2 3 
+```
 """
 function show_bipartition(n::Int64, idx::Int64)
     show_bipartitions(n,start = idx,stop = idx)
 end;
 
 """
-    Function to get existing taxa on an edge
-    Input:
-        encoded_taxa: a Vector of booleans where true for taxa that are descendent of the edge, false for other taxa
-    output:
-        a Vector of taxa that exist on the edge
+Function to get existing taxa on an edge
+
+Input:
+    encoded_taxa: a Vector of booleans where true for taxa that are descendent of the edge, false for other taxa
+output:
+    A Vector of taxa that exist on the edge
 """
 function get_taxa(encoded_taxa)
     nodes = []
@@ -107,28 +114,26 @@ function get_taxa(encoded_taxa)
 end
 
 """
-    Function to get the bipartition format of a phylogenetic tree
-    Input:
-        tree: a HybridNetwork object that reperents the tree
-        n: the number of taxa of the tree
-    output:
-        a Vector of pairs shows the tree in bipartiton format
-    Example:
-        tree:
-            HybridNetwork, Rooted Network
-            6 edges
-            7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
-            tip labels: 4, 1, 2, 3
-            (4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);
+    get_bipartition(tree::HybridNetwork, n::Int64)
 
-        get_bipartition(tree, 4):
-            6-element Vector{Any}:
-                3 => 4.249
-                0 => 2.457
-                1 => 2.064
-                2 => 2.064
-                6 => 0.393
-                3 => 1.793
+Function to get the bipartition format of a phylogenetic tree.
+
+# Arguments
+ - `tree`: a HybridNetwork object that reperents the tree.
+ - `n`: the number of taxa of the tree.
+# Output
+ A `Vector` of pairs shows the tree in bipartiton format.
+# Example
+```jldoctest
+julia> get_bipartition(readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), 4)
+6-element Vector{Any}:
+ 3 => 4.249
+ 0 => 2.457
+ 1 => 2.064
+ 2 => 2.064
+ 6 => 0.393
+ 3 => 1.793
+```       
 """
 function get_bipartition(tree::HybridNetwork, n::Int64)
     taxa = sort(tipLabels(tree))
@@ -171,25 +176,24 @@ end
 
 
 """
-    Function to get the bipartition format of phylogenetic trees in Matrix
-    Note that all taxa will be replaced by numbers. Use the function num_to_name to 
-    get a Dictionary containing the name of the taxon corresponding to the number
-    Input:
-        trees: a Vector of HybridNetwork objects that contains trees
-        n: the number of taxa of the trees
-    output:
-        a Matrix shows the tree in bipartiton format
-    Example:
-        tree:
-            HybridNetwork, Rooted Network
-            6 edges
-            7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
-            tip labels: 4, 1, 2, 3
-            (4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);
+    print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
 
-        print_bipartition([tree], 4)
-            1*7 Matrix{Float64}:
-            2.457  2.064  2.064  6.042  0.0  0.0  0.393
+Function to get the bipartition format of phylogenetic trees in Matrix.
+Note that all taxa will be replaced by numbers. Use the function [`num_to_name`](@ref) to 
+get a Dictionary containing the name of the taxon corresponding to the number.
+
+# Arguments
+ - `trees`: a Vector of HybridNetwork objects that contains trees
+ - `n`: the number of taxa of the trees
+# Output
+ A `Matrix{Float64}` shows the trees in bipartiton format
+# Example
+```jldoctest
+julia> print_bipartition([readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), readTopology("(4:4.308,(2:1.634,(1:1.588,3:1.588):0.046):2.674);")], 4)
+2×7 Matrix{Float64}:
+ 2.457  2.064  2.064  6.042  0.0  0.0    0.393
+ 1.588  1.634  1.588  6.982  0.0  0.046  0.0
+```
 """
 function print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
     
@@ -210,25 +214,23 @@ function print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
 end
 
 """
-    Function to obtain a table that contains taxon numbers and their names 
-    Input:
-        trees: a HybridNetwork objects that contains trees
-    output:
-        a Dictionary shows taxon numbers and their names
-    Example:
-        tree:
-            HybridNetwork, Rooted Network
-            6 edges
-            7 nodes: 4 tips, 0 hybrid nodes, 3 internal tree nodes.
-            tip labels: O, HYB, P1, P2
-            (O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);
+    num_to_name(tree::HybridNetwork)
+    
+Function to obtain a table that contains taxon numbers and their names 
 
-        print_bipartition([tree], 4)
-            Dict{Int64, Any} with 4 entries:
-            4 => "P2"
-            2 => "O"
-            3 => "P1"
-            1 => "HYB"
+# Arguments
+ - `tree`: a HybridNetwork objects that contains trees
+# Output
+ A `Dict{Int64, Any}` shows taxon numbers and their names
+# Example
+```jldoctest
+julia> num_to_name(readTopology("(O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);"))
+Dict{Int64, Any} with 4 entries:
+  4 => "P2"
+  2 => "O"
+  3 => "P1"
+  1 => "HYB"
+```
 """
 function num_to_name(tree::HybridNetwork)
     taxa = sort(tipLabels(tree))

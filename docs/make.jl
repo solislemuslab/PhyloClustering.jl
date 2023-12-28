@@ -1,8 +1,10 @@
-using Documenter, PhyloClustering
+using Documenter, PhyloClustering, PhyloNetworks
+
+DocMeta.setdocmeta!(PhyloClustering, :DocTestSetup, :(using PhyloClustering, PhyloNetworks); recursive=true)
 
 makedocs(
     sitename="PhyloClustering.jl",
-    authors="Yibo Kong, Claudia Solís-Lemus, and contributors",
+    authors="Yibo Kong, Tiley, G. P., Claudia Solís-Lemus, and contributors",
     modules=[PhyloClustering],
     format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
     checkdocs=:exports,
@@ -17,7 +19,7 @@ makedocs(
             "model/gmm.md",
         ],
         "Library" => [
-            "Helper Methods" => "lib/helper_methods.md",
+            "Helper Functions" => "lib/helper_methods.md",
         ]
     ]
 )

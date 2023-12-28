@@ -1,3 +1,5 @@
+__precompile__()
+
 module PhyloClustering
     include("bipartition.jl")
     include("helper.jl")
