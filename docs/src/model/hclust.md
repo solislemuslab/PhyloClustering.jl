@@ -5,6 +5,6 @@ algorithms build a dendrogram of nested clusters by repeatedly merging
 or splitting clusters.
 
 ```@docs
-hc_label(matrix::AbstractMatrix{<:Real}, n::Int64; linkage::Symbol=:ward)
+hc_label
 ```
 

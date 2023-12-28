@@ -15,5 +15,5 @@ The implementation of *DBSCAN* algorithm provided by [Clustering](https://julias
 supports the two ways of specifying clustering data:
 
 ```@docs
-dbscan_label(tree::AbstractMatrix{<:Real}, radius::Real; min_neighbors::Int64 = 1, min_cluster_size::Int64 = 1) 
+dbscan_label
 ```

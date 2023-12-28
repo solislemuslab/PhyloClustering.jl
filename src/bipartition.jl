@@ -1,11 +1,14 @@
 using PhyloNetworks, Combinatorics, Formatting
 
 """
+        num_bipartitions(n::Int64)
+
     Function to get number of bipartitions.
-    Input:
-        n: the number of taxa
-    output:
-        the number of bipartition corresponding to the number of taxa 
+
+    # Arguments
+        - `n`: the number of taxa.
+    # Output:
+        The number of bipartition corresponding to the number of taxa.
 """
 function num_bipartitions(n::Int64)
     return 2^(n-1) - 1
@@ -13,14 +16,17 @@ end;
 
 
 """
+        show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
+
     Function to show the bipartitions between certain indices of the number of taxa.
-    Input:
-        n: the number of taxa
-        start: the starting index
-        stop: the ending index
-    output:
-        the bipartiions of trees with n taxa between start index and stop index
-    Example:
+
+    # Arguments
+        `n`: the number of taxa
+        `start`(defaults to `0`): the starting index.
+        `stop`(defaults to `-1`): the ending index.
+    # Output
+        The bipartiions of trees with n taxa between start index and stop index.
+    # Example
     show_bipartitions(4,stop = 4):
         idx	partition
         0	1 | 2 3 4 
@@ -65,11 +71,14 @@ function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
 end;
 
 """
+        show_bipartition(n::Int64, idx::Int64)
+
     Function to show the bipartition with a given index of the number of taxa.
-    Input:
+
+    # Arguments
         n: the number of taxa
         idx: the bipartition to show
-    output:
+    # Output
         the idx-th bipartiion of trees with n taxa
         Example:
         show_bipartition(4, 3):
