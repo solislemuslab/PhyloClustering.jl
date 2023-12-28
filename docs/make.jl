@@ -1,6 +1,9 @@
-using Documenter, PhyloClustering, PhyloNetworks
+import Pkg; 
+Pkg.add("PhyloNetworks")
 
-DocMeta.setdocmeta!(PhyloClustering, :DocTestSetup, :(using PhyloClustering, PhyloNetworks); recursive=true)
+using Documenter, PhyloClustering, PhyloNetworks;
+
+DocMeta.setdocmeta!(PhyloClustering, :DocTestSetup, :(using PhyloClustering, PhyloNetworks); recursive=true);
 
 makedocs(
     sitename="PhyloClustering.jl",
