@@ -13,7 +13,7 @@ kmeans_label
 
 ## [Example](@id usage)
 
-```@example
+```@example 1
 using PhyloClustering, PhyloNetworks, StableRNGs
 # use RNG for stable result
 rng = StableRNG(1)
@@ -22,13 +22,19 @@ rng = StableRNG(1)
 trees = readMultiTopology("../data/data.trees");
 
 # convert trees to Bipartition foramt and embed them via split-weight embedding
-trees = split_weight(trees, 4);
+trees = split_weight(trees, 4)
+```
 
-# standardize the data and input them into Yinyang K-means clustering.
+Standardize the data and input them into Yinyang K-means clustering.
+
+```@example 1
 tree = standardize_tree(trees);
 label = kmeans_label(tree, 2, rng=rng)
+```
 
-# visualize the result
+We can visualize the result using build-in function [`plot_clusters`](@ref).
+
+```@example 1
 plot_clusters(trees', label)
 ```
 

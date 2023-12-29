@@ -151,6 +151,5 @@ Backup[ ]of[ ]*.numbers/
 .ipynb_checkpoints/
 
 ###data
-*.trees
-*.tree
 Manifest.toml
+docs/build/

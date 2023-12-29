@@ -6,7 +6,7 @@
 hc_label
 ```
 ## Example
-```@example
+```@example 1
 using PhyloClustering, PhyloNetworks
 
 # read trees with 4-taxa in Newick format using PhyloNetworks
@@ -14,13 +14,19 @@ trees = readMultiTopology("../data/data.trees");
 
 # convert trees to Bipartition foramt and embed them via split-weight embedding
 trees = split_weight(trees, 4);
+```
 
-# standardize the data, calculate the distance matrix, and input them into Yinyang K-means clustering.
+Standardize the data, calculate the distance matrix, and input them into Yinyang K-means clustering.
+
+```@example 1
 tree = standardize_tree(trees);
 matrix = distance(tree);
 label = hc_label(matrix, 2)
+```
 
-# visualize the result
+We can visualize the result using build-in function [`plot_clusters`](@ref).
+
+```@example 1
 plot_clusters(trees', label)
 ```
 
