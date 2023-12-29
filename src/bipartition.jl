@@ -3,7 +3,7 @@ using PhyloNetworks, Combinatorics, Formatting
 """
     num_bipartitions(n::Int64)
 
-Function to get number of bipartitions.
+Get the number of bipartitions for a given number of taxa.
 
 # Arguments
  - `n`: the number of taxa.
@@ -18,7 +18,7 @@ end;
 """
     show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
 
-Function to show the bipartitions between certain indices of the number of taxa.
+Show the bipartitions between certain indices for a given number of taxa.
 
 # Arguments
  - `n`: the number of taxa
@@ -76,7 +76,7 @@ end;
 """
     show_bipartition(n::Int64, idx::Int64)
 
-Function to show the bipartition with a given index of the number of taxa.
+Show the bipartition with a given index for a given number of taxa.
 
 # Arguments
  - `n`: the number of taxa.
@@ -96,7 +96,7 @@ function show_bipartition(n::Int64, idx::Int64)
 end;
 
 """
-Function to get existing taxa on an edge
+Get existing taxa on an edge
 
 Input:
     encoded_taxa: a Vector of booleans where true for taxa that are descendent of the edge, false for other taxa
@@ -116,7 +116,7 @@ end
 """
     get_bipartition(tree::HybridNetwork, n::Int64)
 
-Function to get the bipartition format of a phylogenetic tree.
+Get the bipartition format of a phylogenetic tree.
 
 # Arguments
  - `tree`: a HybridNetwork object that reperents the tree.
@@ -176,9 +176,9 @@ end
 
 
 """
-    print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
+    split_weight(trees::Vector{HybridNetwork}, n::Int64)
 
-Function to get the bipartition format of phylogenetic trees in Matrix.
+Split-weight embedding of phylogenetic trees in a `Vector{HybridNetwork}`.
 Note that all taxa will be replaced by numbers. Use the function [`num_to_name`](@ref) to 
 get a Dictionary containing the name of the taxon corresponding to the number.
 
@@ -189,13 +189,13 @@ get a Dictionary containing the name of the taxon corresponding to the number.
  A `Matrix{Float64}` shows the trees in bipartiton format
 # Example
 ```jldoctest
-julia> print_bipartition([readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), readTopology("(4:4.308,(2:1.634,(1:1.588,3:1.588):0.046):2.674);")], 4)
+julia> split_weight([readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), readTopology("(4:4.308,(2:1.634,(1:1.588,3:1.588):0.046):2.674);")], 4)
 2×7 Matrix{Float64}:
  2.457  2.064  2.064  6.042  0.0  0.0    0.393
  1.588  1.634  1.588  6.982  0.0  0.046  0.0
 ```
 """
-function print_bipartition(trees::Vector{HybridNetwork}, n::Int64)
+function split_weight(trees::Vector{HybridNetwork}, n::Int64)
     
     # build the table
     N = num_bipartitions(n)
@@ -216,7 +216,7 @@ end
 """
     num_to_name(tree::HybridNetwork)
     
-Function to obtain a table that contains taxon numbers and their names 
+Obtain a table that contains taxon numbers and their names for a given tree.
 
 # Arguments
  - `tree`: a HybridNetwork objects that contains trees

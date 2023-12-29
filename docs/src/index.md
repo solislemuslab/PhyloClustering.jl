@@ -1,7 +1,7 @@
 
 # PhyloClustering.jl
 
-[PhyloClustering.jl](https://github.com/solislemuslab/ml-phylo-trees) is a [Julia](http://julialang.org/) package for performing unsupervised learning on phylogenetic trees. The algorithms currently included are K-means, Hierarchical Clustering, Gaussian Mixture Model, and DBSCAN.
+[PhyloClustering.jl](https://github.com/solislemuslab/ml-phylo-trees) is a [Julia](http://julialang.org/) package for performing unsupervised learning on phylogenetic trees. The algorithms currently included are K-means, Hierarchical Clustering, Gaussian Mixture Model (GMM), and Density-based Spatial Clustering of Applications with Noise (DBSCAN).
 
 ## Citation
 

@@ -17,7 +17,7 @@ using Suppressor # for capture printed result
         @test get_bipartition(trees[2],4) == [3 => 4.04, 2 => 2.035, 0 => 1.084, 1 => 1.084, 4 => 0.95, 3 => 2.006]
         @test num_to_name(trees[1]) == Dict{Int64, Any}(4 => "4", 2 => "2", 3 => "3", 1 => "1")
         @test (@capture_out get_bipartition(trees[1],6)) == "check the parameter n"
-        @test print_bipartition(trees,4) == [
+        @test split_weight(trees,4) == [
             2.073 2.073 2.492 7.764 0.419 0.0 0.0; 
             1.084 1.084 2.035 6.045999999999999 0.95 0.0 0.0; 
             1.234 1.234 2.1 6.221 0.865 0.0 0.0; 
@@ -26,7 +26,7 @@ using Suppressor # for capture printed result
         trees = readMultiTopology("file/test.trees")
         @test get_bipartition(trees[4],4) == [1 => 3.555816, 2 => 2.399569, 0 => 0.629763, 3 => 0.629763, 6 => 1.769806, 1 => 1.156247]
         @test num_to_name(trees[1]) == Dict{Int64, Any}(4 => "P2", 2 => "O", 3 => "P1", 1 => "HYB")
-        @test print_bipartition(trees,4) == [
+        @test split_weight(trees,4) == [
             1.593392 6.139258 1.207652 1.207652 0.38574 0.0 0.0; 
             0.852455 2.093894 2.093894 0.852455 0.0 0.0 1.779641; 
             1.534422 2.006191 2.287441 1.534422 0.0 0.0 0.471769; 
@@ -36,7 +36,7 @@ using Suppressor # for capture printed result
         trees = readMultiTopology("file/6-taxon-tree.trees")
         @test get_bipartition(trees[3],6) == [5 => 0.08797164, 4 => 0.07148751, 2 => 0.04760093, 3 => 0.05347179, 0 => 0.0342379, 1 => 0.02864877, 6 => 0.005502266, 22 => 0.01711993, 6 => 0.004750963]
         @test (@capture_out get_bipartition(trees[2],11)) == "check the parameter n"
-        @test print_bipartition(trees, 6) == [
+        @test split_weight(trees, 6) == [
             0.0256169 0.01151126 0.03644864 0.03587151 0.07877169 0.06931551 0.03743503 0.0 0.0 0.0 0.0 0.003646167 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01414154 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0; 
             0.01862177 0.04619028 0.02224014 0.02355061 0.084584 0.1004835 0.03322833 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01557455 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0; 
             0.0342379 0.02864877 0.04760093 0.05347179 0.07148751 0.08797164 0.010253228999999999 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.01711993 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0; 
