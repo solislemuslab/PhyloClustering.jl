@@ -2,7 +2,7 @@ include("../src/helper.jl")
 @testset "helper.jl" begin
     @testset "standardize trees" begin
         trees = readMultiTopology("file/4-taxon-tree.trees")
-        tree = print_bipartition(trees, 4)
+        tree = split_weight(trees, 4)
         N = size(tree)[1]
         B = size(tree)[2]
         @test !(mean(tree[1,:]) ≈ 0)
@@ -12,7 +12,7 @@ include("../src/helper.jl")
         @test [mean(tree[i,:]) for i in 1:7] ≈ [0,0,0,0,0,0,0] atol=0.1
 
         trees = readMultiTopology("file/8-taxon-tree.trees")
-        tree = print_bipartition(trees, 8)
+        tree = split_weight(trees, 8)
         N = size(tree)[1]
         B = size(tree)[2]
         n = num_bipartitions(8)
@@ -23,7 +23,7 @@ include("../src/helper.jl")
         @test [mean(tree[i,:]) for i in 1:n] ≈ repeat([0], outer = n) atol=0.1
 
         trees = readMultiTopology("file/16-taxon-tree.trees")
-        tree = print_bipartition(trees, 16)
+        tree = split_weight(trees, 16)
         N = size(tree)[1]
         B = size(tree)[2]
         n = num_bipartitions(16)
@@ -36,14 +36,14 @@ include("../src/helper.jl")
 
     @testset "visualization" begin
         trees = readMultiTopology("file/4-taxon-tree.trees")
-        tree = print_bipartition(trees, 4)
+        tree = split_weight(trees, 4)
         label = [1,2,1,2]
         @test_logs plot_clusters(tree, label)
     end
 
     @testset "Euclidean distance matrix" begin
         trees = readMultiTopology("file/8-taxon-tree.trees")
-        tree = print_bipartition(trees, 8)
+        tree = split_weight(trees, 8)
         tree = standardize_tree(tree)
         matrix = distance(tree)
         @test size(matrix)[1] == size(matrix)[2]
@@ -55,7 +55,7 @@ include("../src/helper.jl")
             5.625211680819353 5.896362019739273 6.260740103673938 0.0] atol=0.001
 
         trees = readMultiTopology("file/16-taxon-tree.trees")
-        tree = print_bipartition(trees, 16)
+        tree = split_weight(trees, 16)
         tree = standardize_tree(tree)
         matrix = distance(tree)
         @test size(matrix)[1] == size(matrix)[2]

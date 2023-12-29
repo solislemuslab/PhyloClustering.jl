@@ -1,9 +1,10 @@
 import Pkg; 
 Pkg.add("PhyloNetworks")
+Pkg.add("StableRNGs")
 
-using Documenter, PhyloClustering, PhyloNetworks;
+using Documenter, PhyloClustering, PhyloNetworks, StableRNGs;
 
-DocMeta.setdocmeta!(PhyloClustering, :DocTestSetup, :(using PhyloClustering, PhyloNetworks); recursive=true);
+DocMeta.setdocmeta!(PhyloClustering, :DocTestSetup, :(using PhyloClustering, PhyloNetworks, StableRNGs); recursive=true);
 
 makedocs(
     sitename="PhyloClustering.jl",
@@ -14,6 +15,7 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "Installation" => "man/installation.md",
+        "Split-Weight Embedding" => "lib/bipartition.md",
         "Models" => [
             "model/basic.md",
             "model/kmeans.md",

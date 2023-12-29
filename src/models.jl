@@ -3,7 +3,7 @@ using Clustering, GaussianMixtures, ParallelKMeans, Random
 """
     kmeans_label(tree::AbstractMatrix{<:Real}, n::Int64; init::String="k-means++", rng::AbstractRNG=Random.GLOBAL_RNG)
 
-Function to get predicted labels from Yinyang K-means clustering.
+Get predicted labels from Yinyang K-means clustering for a group of phylogenetic trees.
 
 # Arguments
  - `tree`: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format).
@@ -22,7 +22,7 @@ end
 """
     gmm_label(tree::AbstractMatrix{<:Real}, n::Int64; method::Symbol=:kmeans, kind::Symbol=:diag)
 
-Function to get predicted labels from Gaussian mixture model.
+Get predicted labels from Gaussian mixture model for a group of phylogenetic trees.
 
 # Arguments
  - `tree`: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format).
@@ -49,7 +49,7 @@ end;
 """
     hc_label(matrix::AbstractMatrix{<:Real}, n::Int64; linkage::Symbol=:ward)
 
-Function to get predicted labels from hierarchical clustering.
+Get predicted labels from hierarchical clustering for a group of phylogenetic trees.
 
 # Arguments
  - `matrix`: a N * N pairwise distance Matrix.
@@ -71,7 +71,7 @@ end
 """
     dbscan_label(tree::AbstractMatrix{<:Real}, radius::Real; min_neighbors::Int64 = 1, min_cluster_size::Int64 = 1)
     
-Function to get predicted labels from density-based spatial clustering of applications with noise.
+Get predicted labels from density-based spatial clustering of applications with noise for a group of phylogenetic trees.
 
 # Arguments
  - `tree`: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format) and B < N.

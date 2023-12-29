@@ -3,7 +3,8 @@ using MultivariateStats, StatsBase, CairoMakie, Distances
 """
     standardize_tree(tree::AbstractMatrix{<:Real})
 
-Function to standardize tree Matrix.
+Standardize tree Matrix that returned by [`split_weight`](@ref). 
+It is recommended to standardize the data before inputting it into the model.
 
 # Arguments
  - `tree`: a N * B Matrix containing trees (each row is a B-dimensional tree in bipartiton format).
@@ -22,7 +23,7 @@ end
 """
     plot_clusters(tree::AbstractMatrix{<:Real}, label::Vector{Int64})
 
-Function to visualize the result of models.
+Visualize the result of models.
 
 # Arguments
  - `tree`: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format).
@@ -39,7 +40,7 @@ end
 """
     distance(tree::AbstractMatrix{<:Real})
     
-Function to get the distance Matrix of a tree Matrix.
+Get the distance Matrix of a tree Matrix returned by [`split_weight`](@ref).
 
 # Arguments
  - `tree`: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format).

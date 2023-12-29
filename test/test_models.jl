@@ -5,11 +5,11 @@ using Suppressor
 rng = StableRNG(376)
 
 trees = readMultiTopology("file/8-taxon-tree.trees")
-tree = print_bipartition(trees, 8)
+tree = split_weight(trees, 8)
 tree_8 = standardize_tree(tree)
 
 trees = readMultiTopology("file/16-taxon-tree.trees")
-tree = print_bipartition(trees, 16)
+tree = split_weight(trees, 16)
 tree_16 = standardize_tree(tree);
 
 @testset "models.jl" begin

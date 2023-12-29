@@ -17,6 +17,6 @@ module PhyloClustering
         show_bipartitions,
         show_bipartition,
         get_bipartition,
-        print_bipartition,
+        split_weight,
         num_to_name
 end
