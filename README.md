@@ -33,7 +33,7 @@ To check or get all the original data from tests, check the GitHub repository [h
 If you use `PhyloClustering.jl` in your work, we kindly ask that you cite the following paper: 
 ```
 @article{kong_Tiley_solis-lemus_2023,
-author = {Kong, Y. , Tiley, G. P., and Sol'{i}s-Lemus, C.},
+author = {Kong, Y., Tiley, G. P., and Sol'{i}s-Lemus, C.},
 year = {2023},
 title = {{Unsupervised learning of phylogenetic trees via split-weight embedding}},
 url={https://arxiv.org/abs/2312.16074}
