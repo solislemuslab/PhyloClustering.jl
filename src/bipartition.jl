@@ -11,7 +11,7 @@ Get the number of bipartitions for a given number of taxa.
  The number of bipartition corresponding to the number of taxa.
 """
 function num_bipartitions(n::Int64)
-    return 2^(n-1) - 1
+    return 2^(n - 1) - 1
 end;
 
 
@@ -38,7 +38,7 @@ idx\tpartition
 4\t1 2 | 3 4 
 ```
 """
-function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
+function show_bipartitions(n::Int64; start::Int64=0, stop::Int64=-1)
     idx_width = length(string(num_bipartitions(n)))
     idx_fmt = FormatSpec(string(">", idx_width, "s"))
     node_width = length(string(n))
@@ -46,13 +46,13 @@ function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
     idx = 0
     node = Vector(1:n)
     println("idx\tpartition")
-    for i in range(1, n÷2)
-        
+    for i in range(1, n ÷ 2)
+
         comb = combinations(Vector(1:n), i)
         if i == n - i
-            comb = Iterators.take(comb,  binomial(n,i)÷ 2)
+            comb = Iterators.take(comb, binomial(n, i) ÷ 2)
         end
-            
+
         for c in comb
             if start <= idx && (stop == -1 || idx <= stop)
                 printfmt(idx_fmt, idx)
@@ -62,7 +62,7 @@ function show_bipartitions(n::Int64; start::Int64 = 0, stop::Int64=-1)
                     print(" ")
                 end
                 print("| ")
-                for e in sort(collect(setdiff(node ,Set(c))))
+                for e in sort(collect(setdiff(node, Set(c))))
                     printfmt(node_fmt, e)
                     print(" ")
                 end
@@ -92,7 +92,7 @@ idx\tpartition
 ```
 """
 function show_bipartition(n::Int64, idx::Int64)
-    show_bipartitions(n,start = idx,stop = idx)
+    show_bipartitions(n, start=idx, stop=idx)
 end;
 
 """
@@ -145,30 +145,30 @@ function get_bipartition(tree::HybridNetwork, n::Int64)
     result = []
     idx = 0
     for i in tree.edge
-        node_idx = hardwiredCluster(i,taxa)
+        node_idx = hardwiredCluster(i, taxa)
         branch_node = get_taxa(node_idx)
-        
+
         # if branch seperates more than half nodes, we use the small part to get bipartition idx
         if (length(branch_node) > n ÷ 2)
-             branch_node = sort(collect(setdiff(node,branch_node)))
+            branch_node = sort(collect(setdiff(node, branch_node)))
         end
-        
+
         # generate all possible combination with the same number of nodes
         comb = collect(combinations(Vector(1:n), length(branch_node)))
         for c in 1:length(comb)
             if comb[c] == branch_node
                 # if the combination is the later, we need to find its first half
                 if length(branch_node) > 1 && c > length(comb) ÷ 2
-                    c = length(comb) - c + 1 
+                    c = length(comb) - c + 1
                 end
                 idx = c - 1
                 break
             end
         end
-        for j in 1:(length(branch_node) - 1)
-            idx = idx + binomial(n,j)
+        for j in 1:(length(branch_node)-1)
+            idx = idx + binomial(n, j)
         end
-        push!(result,Pair(idx, i.length))
+        push!(result, Pair(idx, i.length))
         idx = 0
     end
     return result
@@ -196,19 +196,16 @@ julia> split_weight([readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.
 ```
 """
 function split_weight(trees::Vector{HybridNetwork}, n::Int64)
-    
-    # build the table
     N = num_bipartitions(n)
     data = zeros(length(trees), N)
-    treeNum = 1;
+    treeNum = 1
     # get existing index
-    
     for tree in trees
         bipart = get_bipartition(tree, n)
         for j in 1:length(bipart)
-            data[treeNum,(bipart[j][1] + 1)] += bipart[j][2]
+            data[treeNum, (bipart[j][1]+1)] += bipart[j][2]
         end
-        treeNum+=1
+        treeNum += 1
     end
     return data
 end
@@ -234,7 +231,7 @@ Dict{Int64, Any} with 4 entries:
 """
 function num_to_name(tree::HybridNetwork)
     taxa = sort(tipLabels(tree))
-    dict = Dict{Int64, Any}()
+    dict = Dict{Int64,Any}()
     for i in 1:length(taxa)
         dict[i] = taxa[i]
     end
