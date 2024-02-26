@@ -232,7 +232,7 @@ Dict{Int64, Any} with 4 entries:
 function num_to_name(tree::HybridNetwork)
     taxa = sort(tipLabels(tree))
     dict = Dict{Int64,Any}()
-    for i in 1:eachindex(taxa)
+    for i in eachindex(taxa)
         dict[i] = taxa[i]
     end
     return dict
