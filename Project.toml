@@ -1,7 +1,7 @@
 name = "PhyloClustering"
 uuid = "2e4ec7c6-185f-4bfd-8419-ce336ea983f6"
 authors = ["Yibo Kong <ykong42@wisc.edu> and contributors"]
-version = "0.1.1"
+version = "0.2.0"
 
 [deps]
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
