@@ -105,7 +105,7 @@ output:
 """
 function get_taxa(encoded_taxa)
     nodes = []
-    for i in 1:length(encoded_taxa)
+    for i in eachindex(encoded_taxa)
         if encoded_taxa[i]
             append!(nodes, i)
         end
@@ -155,7 +155,7 @@ function get_bipartition(tree::HybridNetwork, n::Int64)
 
         # generate all possible combination with the same number of nodes
         comb = collect(combinations(Vector(1:n), length(branch_node)))
-        for c in 1:length(comb)
+        for c in eachindex(comb)
             if comb[c] == branch_node
                 # if the combination is the later, we need to find its first half
                 if length(branch_node) > 1 && c > length(comb) ÷ 2
@@ -202,7 +202,7 @@ function split_weight(trees::Vector{HybridNetwork}, n::Int64)
     # get existing index
     for tree in trees
         bipart = get_bipartition(tree, n)
-        for j in 1:length(bipart)
+        for j in eachindex(bipart)
             data[treeNum, (bipart[j][1]+1)] += bipart[j][2]
         end
         treeNum += 1
@@ -232,7 +232,7 @@ Dict{Int64, Any} with 4 entries:
 function num_to_name(tree::HybridNetwork)
     taxa = sort(tipLabels(tree))
     dict = Dict{Int64,Any}()
-    for i in 1:length(taxa)
+    for i in eachindex(taxa)
         dict[i] = taxa[i]
     end
     return dict
