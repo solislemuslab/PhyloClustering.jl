@@ -1,4 +1,4 @@
-using MultivariateStats, StatsBase, CairoMakie, Distances
+using MultivariateStats, StatsBase, Distances
 
 """
     standardize_tree(tree::AbstractMatrix{<:Real})
@@ -12,29 +12,12 @@ It is recommended to standardize the data before inputting it into the model.
  A standardized B * N tree `Matrix` with a mean of about 0 and a standard deviation of about 1.
     This tree `Matrix` can be the input of [model](@ref basics).
 """
-function standardize_tree(tree::AbstractMatrix{<:Real})    
-    data = collect(tree');
+function standardize_tree(tree::AbstractMatrix{<:Real})
+    data = collect(tree')
     dt = fit(ZScoreTransform, data, dims=2)
     data = StatsBase.transform(dt, data)
-    replace!(data, NaN=>0)
+    replace!(data, NaN => 0)
     return data
-end
-
-"""
-    plot_clusters(tree::AbstractMatrix{<:Real}, label::Vector{Int64})
-
-Visualize the result of models.
-
-# Arguments
- - `tree`: a B * N tree Matrix (each column of tree Matrix is a B-dimensional tree in bipartiton format).
- - `label`: an N-length Vector containing predicted labels for each tree. People can use the output of the models.
-# Output
- A scatter plot showing tree clusters.
-"""
-function plot_clusters(tree::AbstractMatrix{<:Real}, label::Vector{Int64})
-    PCA_model = fit(PCA, tree, maxoutdim = 2);
-    PCA_data = predict(PCA_model,tree)
-    scatter(PCA_data[1,:], PCA_data[2,:], markersize = 5, color = label)
 end
 
 """

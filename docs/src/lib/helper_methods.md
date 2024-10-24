@@ -3,8 +3,3 @@
 standardize_tree
 distance
 ```
-
-# Visualize results
-```@docs
-plot_clusters
-```

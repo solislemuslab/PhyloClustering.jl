@@ -32,12 +32,6 @@ tree = standardize_tree(trees);
 label = kmeans_label(tree, 2, rng=rng)
 ```
 
-We can visualize the result using build-in function [`plot_clusters`](@ref).
-
-```@example 1
-plot_clusters(trees', label)
-```
-
 **Reference**
 
 The implementation of *Yinyang K-means* is provided by [`ParallelKMeans.jl`](https://github.com/PyDataBlog/ParallelKMeans.jl).

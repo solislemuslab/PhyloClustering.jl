@@ -24,12 +24,6 @@ matrix = distance(tree);
 label = hc_label(matrix, 2)
 ```
 
-We can visualize the result using build-in function [`plot_clusters`](@ref).
-
-```@example 1
-plot_clusters(trees', label)
-```
-
 **Reference**
 
 The implementation of *hierarchical clustering* is provided by [`Clustering.jl`](https://github.com/JuliaStats/Clustering.jl).

@@ -11,7 +11,6 @@ export
     hc_label,
     dbscan_label,
     standardize_tree,
-    plot_clusters,
     distance,
     num_bipartitions,
     show_bipartitions,
