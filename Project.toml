@@ -17,6 +17,7 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
+CairoMakie = "0.15"
 Clustering = "0.15.5"
 Combinatorics = "1.0.2"
 Distances = "0.10.10"
@@ -24,8 +25,8 @@ GaussianMixtures = "0.3.8"
 MultivariateStats = "0.10.2"
 ParallelKMeans = "1.1.0"
 PhyloNetworks = "1"
-StatsBase = "0.33.21"
-julia = "1.7, 1.8, 1.9, 1.10"
+StatsBase = "0.34"
+julia = "1.10"
 
 [extras]
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
