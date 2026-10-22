@@ -1,4 +1,4 @@
-using PhyloNetworks, Combinatorics, Formatting
+using PhyloNetworks, Combinatorics, Format
 
 """
     num_bipartitions(n::Int64)
