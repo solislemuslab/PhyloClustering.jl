@@ -13,7 +13,7 @@ using Suppressor # for capture printed result
     end
 
     @testset "get bipartitions of phylogenetic trees in Newick format " begin
-        trees = readMultiTopology("file/4-taxon-tree.trees")
+        trees = readmultinewick("file/4-taxon-tree.trees")
         @test get_bipartition(trees[2],4) == [3 => 4.04, 2 => 2.035, 0 => 1.084, 1 => 1.084, 4 => 0.95, 3 => 2.006]
         @test num_to_name(trees[1]) == Dict{Int64, Any}(4 => "4", 2 => "2", 3 => "3", 1 => "1")
         @test (@capture_out get_bipartition(trees[1],6)) == "check the parameter n"
@@ -23,7 +23,7 @@ using Suppressor # for capture printed result
             1.234 1.234 2.1 6.221 0.865 0.0 0.0; 
             2.457 2.064 2.064 6.042 0.0 0.0 0.393]
 
-        trees = readMultiTopology("file/test.trees")
+        trees = readmultinewick("file/test.trees")
         @test get_bipartition(trees[4],4) == [1 => 3.555816, 2 => 2.399569, 0 => 0.629763, 3 => 0.629763, 6 => 1.769806, 1 => 1.156247]
         @test num_to_name(trees[1]) == Dict{Int64, Any}(4 => "P2", 2 => "O", 3 => "P1", 1 => "HYB")
         @test split_weight(trees,4) == [
@@ -33,7 +33,7 @@ using Suppressor # for capture printed result
             0.629763 4.712063000000001 2.399569 0.629763 0.0 0.0 1.769806; 
             1.524985 4.543632 1.524985 2.4089 0.0 0.883915 0.0]
 
-        trees = readMultiTopology("file/6-taxon-tree.trees")
+        trees = readmultinewick("file/6-taxon-tree.trees")
         @test get_bipartition(trees[3],6) == [5 => 0.08797164, 4 => 0.07148751, 2 => 0.04760093, 3 => 0.05347179, 0 => 0.0342379, 1 => 0.02864877, 6 => 0.005502266, 22 => 0.01711993, 6 => 0.004750963]
         @test (@capture_out get_bipartition(trees[2],11)) == "check the parameter n"
         @test split_weight(trees, 6) == [

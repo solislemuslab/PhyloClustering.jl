@@ -24,7 +24,7 @@ Formatting = "0.4.2"
 GaussianMixtures = "0.3.8"
 MultivariateStats = "0.10.2"
 ParallelKMeans = "1.1.0"
-PhyloNetworks = "0.16.3"
+PhyloNetworks = "1"
 StatsBase = "0.33.21"
 julia = "1.7, 1.8, 1.9, 1.10"
 
