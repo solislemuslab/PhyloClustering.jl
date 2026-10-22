@@ -157,8 +157,11 @@ function get_bipartition(tree::HybridNetwork, n::Int64)
         comb = collect(combinations(Vector(1:n), length(branch_node)))
         for c in eachindex(comb)
             if comb[c] == branch_node
-                # if the combination is the later, we need to find its first half
-                if length(branch_node) > 1 && c > length(comb) ÷ 2
+                # When the split has exactly n/2 taxa on each side, `comb` lists both
+                # halves of the same split, so the second half folds onto the first.
+                # For any smaller side this folding is wrong - every combination is
+                # already a distinct split.
+                if 2 * length(branch_node) == n && c > length(comb) ÷ 2
                     c = length(comb) - c + 1
                 end
                 idx = c - 1
