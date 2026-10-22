@@ -4,11 +4,11 @@ using Suppressor
 
 rng = StableRNG(376)
 
-trees = readMultiTopology("file/8-taxon-tree.trees")
+trees = readmultinewick("file/8-taxon-tree.trees")
 tree = split_weight(trees, 8)
 tree_8 = standardize_tree(tree)
 
-trees = readMultiTopology("file/16-taxon-tree.trees")
+trees = readmultinewick("file/16-taxon-tree.trees")
 tree = split_weight(trees, 16)
 tree_16 = standardize_tree(tree);
 

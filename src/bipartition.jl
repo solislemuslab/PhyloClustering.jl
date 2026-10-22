@@ -1,4 +1,4 @@
-using PhyloNetworks, Combinatorics, Formatting
+using PhyloNetworks, Combinatorics, Format
 
 """
     num_bipartitions(n::Int64)
@@ -125,7 +125,7 @@ Get the bipartition format of a phylogenetic tree.
  A `Vector` of pairs shows the tree in bipartiton format.
 # Example
 ```jldoctest
-julia> get_bipartition(readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), 4)
+julia> get_bipartition(readnewick("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), 4)
 6-element Vector{Any}:
  3 => 4.249
  0 => 2.457
@@ -136,7 +136,7 @@ julia> get_bipartition(readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):
 ```       
 """
 function get_bipartition(tree::HybridNetwork, n::Int64)
-    taxa = sort(tipLabels(tree))
+    taxa = sort(tiplabels(tree))
     if length(taxa) != n
         print("check the parameter n")
         return
@@ -145,7 +145,7 @@ function get_bipartition(tree::HybridNetwork, n::Int64)
     result = []
     idx = 0
     for i in tree.edge
-        node_idx = hardwiredCluster(i, taxa)
+        node_idx = hardwiredcluster(i, taxa)
         branch_node = get_taxa(node_idx)
 
         # if branch seperates more than half nodes, we use the small part to get bipartition idx
@@ -189,7 +189,7 @@ get a Dictionary containing the name of the taxon corresponding to the number.
  A `Matrix{Float64}` shows the trees in bipartiton format
 # Example
 ```jldoctest
-julia> split_weight([readTopology("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), readTopology("(4:4.308,(2:1.634,(1:1.588,3:1.588):0.046):2.674);")], 4)
+julia> split_weight([readnewick("(4:4.249,(1:2.457,(2:2.064,3:2.064):0.393):1.793);"), readnewick("(4:4.308,(2:1.634,(1:1.588,3:1.588):0.046):2.674);")], 4)
 2×7 Matrix{Float64}:
  2.457  2.064  2.064  6.042  0.0  0.0    0.393
  1.588  1.634  1.588  6.982  0.0  0.046  0.0
@@ -221,7 +221,7 @@ Obtain a table that contains taxon numbers and their names for a given tree.
  A `Dict{Int64, Any}` shows taxon numbers and their names
 # Example
 ```jldoctest
-julia> num_to_name(readTopology("(O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);"))
+julia> num_to_name(readnewick("(O:3.866,(HYB:1.593,(P1:1.208,P2:1.208):0.386):2.273);"))
 Dict{Int64, Any} with 4 entries:
   4 => "P2"
   2 => "O"
@@ -230,7 +230,7 @@ Dict{Int64, Any} with 4 entries:
 ```
 """
 function num_to_name(tree::HybridNetwork)
-    taxa = sort(tipLabels(tree))
+    taxa = sort(tiplabels(tree))
     dict = Dict{Int64,Any}()
     for i in eachindex(taxa)
         dict[i] = taxa[i]
