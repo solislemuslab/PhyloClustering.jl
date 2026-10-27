@@ -19,7 +19,7 @@ using PhyloClustering, PhyloNetworks, StableRNGs
 rng = StableRNG(1)
 
 # read trees with 4-taxa in Newick format using PhyloNetworks
-trees = readMultiTopology("../data/data.trees");
+trees = readmultinewick("../data/data.trees");
 
 # convert trees to Bipartition foramt and embed them via split-weight embedding
 trees = split_weight(trees, 4)
