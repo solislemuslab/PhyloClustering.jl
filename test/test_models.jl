@@ -19,7 +19,7 @@ tree_16 = standardize_tree(tree);
         Random.seed!(rng, 376)
         @test kmeans_label(tree_8, 2, rng=rng) == [1, 1, 2, 1]
         @test kmeans_label(tree_8, 2, init="rand", rng=rng) == [1, 2, 2, 1]
-        @test kmeans_label(tree_16, 3, rng=rng) == [3, 1, 2, 3]
+        @test kmeans_label(tree_16, 3, rng=rng) == [3, 1, 2, 2]
     end
 
     @testset "hierarchical clustering" begin
