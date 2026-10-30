@@ -22,7 +22,7 @@ neighbour to the sequence, and remove v.
 
 # Example
 ```jldoctest
-julia> adj = edges_to_adj([(1,4),(2,4),(3,4),(4,5),(5,6)], 6);
+julia> adj = PhyloClustering.edges_to_adj([(1,4),(2,4),(3,4),(4,5),(5,6)], 6);
 
 julia> prufer_encode(adj)
 4-element Vector{Int64}:
