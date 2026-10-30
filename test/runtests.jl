@@ -4,7 +4,8 @@ using Test
 tests = [
     "test_bipartition.jl",
     "test_helper.jl",
-    "test_models.jl"
+    "test_models.jl",
+    "test_prufer.jl"
 ]
 
 anyerrors = false
