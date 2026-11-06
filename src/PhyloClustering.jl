@@ -4,6 +4,8 @@ module PhyloClustering
 include("bipartition.jl")
 include("helper.jl")
 include("models.jl")
+include("trees.jl")
+include("prufer.jl")
 
 export
     kmeans_label,
@@ -17,5 +19,8 @@ export
     show_bipartition,
     get_bipartition,
     split_weight,
-    num_to_name
+    num_to_name,
+    net_to_adj,
+    prufer_encode,
+    prufer_decode
 end

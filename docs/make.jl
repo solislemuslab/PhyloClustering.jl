@@ -16,6 +16,7 @@ makedocs(
         "Home" => "index.md",
         "Installation" => "man/installation.md",
         "Split-Weight Embedding" => "lib/bipartition.md",
+        "Prüfer Encoding" => "lib/prufer.md",
         "Models" => [
             "model/basic.md",
             "model/kmeans.md",
