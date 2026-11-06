@@ -5,7 +5,8 @@ tests = [
     "test_bipartition.jl",
     "test_helper.jl",
     "test_models.jl",
-    "test_prufer.jl"
+    "test_prufer.jl",
+    "test_ola.jl"
 ]
 
 anyerrors = false
