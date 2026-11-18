@@ -18,6 +18,7 @@ makedocs(
         "Split-Weight Embedding" => "lib/bipartition.md",
         "Prüfer Encoding" => "lib/prufer.md",
         "OLA Encoding" => "lib/ola.md",
+        "PhyloVAE Encoding" => "lib/phylovae.md",
         "Models" => [
             "model/basic.md",
             "model/kmeans.md",
