@@ -6,7 +6,8 @@ tests = [
     "test_helper.jl",
     "test_models.jl",
     "test_prufer.jl",
-    "test_ola.jl"
+    "test_ola.jl",
+    "test_phylovae.jl"
 ]
 
 anyerrors = false

@@ -7,6 +7,7 @@ include("models.jl")
 include("trees.jl")
 include("prufer.jl")
 include("ola.jl")
+include("phylovae.jl")
 
 export
     kmeans_label,
@@ -27,5 +28,9 @@ export
     ola_encode,
     ola_decode,
     ola_isvalid,
-    ola_random_code
+    ola_random_code,
+    phylovae_encode,
+    phylovae_decode,
+    phylovae_isvalid,
+    phylovae_random_code
 end
