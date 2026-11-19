@@ -1,16 +1,17 @@
 # Prüfer sequences — labeled trees ↔ integer sequences of length n−2
 #
 # Note: "labeled" here means **all vertices** carry labels 1..n, not just the leaves.
-# Phylogenetic trees are leaf-labeled with anonymous internal nodes, so this does not
-# transfer directly — see reading/Prufer/notes.md.
+# Phylogenetic trees name only their leaves, so this does not transfer directly: a
+# labeling for the internal vertices has to be supplied first, which is what
+# `net_to_adj` does — see reading/Prufer/notes.md.
 #
 # Key rule: vertex v appears in the sequence deg(v) − 1 times.
 #   Appearing 0 times ⟺ v is a leaf. This single rule is both what encode produces
 #   and what decode relies on.
 #
-# Complexity: the naive implementation is O(n²) — each step scans linearly for the
-#   smallest leaf / candidate. A heap brings this down to O(n log n); see the TODO
-#   at the end of the file.
+# Complexity: the method itself is O(n) in both directions. The implementations here
+#   are the naive O(n²) ones — each step scans linearly for the smallest leaf. A heap
+#   gives O(n log n); a forward-only pointer gives O(n). See the TODO at the end.
 
 """
     prufer_encode(adj) -> Vector{Int}
@@ -79,11 +80,14 @@ end
 Decode a Prüfer sequence of length n−2 into a tree on n labeled vertices, returned as
 an edge list (each edge as (u, v) with u < v, sorted globally).
 
-Algorithm: maintain the candidate leaves — labels absent from the **remaining** sequence
-and not yet used. At each step take the smallest candidate, join it to the first element
-of the sequence, then consume that element; if the consumed label no longer appears in
-the remaining sequence, it becomes a candidate in turn. Once the sequence is exhausted,
-join the two labels that are left.
+Algorithm: give every vertex a degree — one, plus the number of times it appears in the
+sequence. Then read the sequence left to right: the lowest-numbered vertex of degree one
+is the current leaf, so join it to the entry being read and take one off both degrees.
+When the sequence runs out, exactly two vertices of degree one are left; join them.
+
+A tree on n vertices has n−1 edges but the sequence holds only n−2 numbers: that last
+edge is free, since once the sequence is exhausted there is only one way to join the two
+vertices that still need an edge.
 
 Every sequence over 1..n of length n−2 maps to a tree (the map is surjective), so this
 also serves as a **uniform random tree generator**: `prufer_decode(rand(1:n, n-2), n)`.
@@ -94,36 +98,29 @@ function prufer_decode(seq::Vector{Int}, n::Int)
     n >= 2 || throw(ArgumentError("requires at least 2 vertices"))
     n == 2 && return [(1, 2)]
 
-    # count[v] = how many times v still appears in the remaining sequence. Initialised
-    # from the whole sequence. By "appearances = deg − 1", count[v] == 0 means v is
-    # currently a leaf.
-    count = zeros(Int, n)
+    # deg[v] = how many edges v still needs. By "v appears deg(v) − 1 times" this is one
+    # more than the appearances v has left in the sequence, so deg[v] == 1 marks a leaf of
+    # whatever is left. Attaching a vertex takes it to 0, which keeps it out of the scan
+    # without a separate "used" flag.
+    deg = ones(Int, n)
     for x in seq
-        count[x] += 1
+        deg[x] += 1
     end
 
-    used = falses(n)                        # vertices already attached and removed from the tree
     edges = Vector{Tuple{Int,Int}}()
     sizehint!(edges, n - 1)
 
     for x in seq
-        # Smallest candidate leaf: not yet used, and absent from the remaining sequence.
-        v = 0
-        for u in 1:n
-            if !used[u] && count[u] == 0
-                v = u
-                break
-            end
-        end
-        v == 0 && error("no candidate leaf found: this should not happen")
+        v = findfirst(==(1), deg)    # lowest-numbered leaf; this scan is the O(n²)
+        v === nothing && error("no leaf found: this should not happen")
 
         push!(edges, minmax(v, x))
-        used[v] = true
-        count[x] -= 1                       # consume this appearance; at 0, x becomes a candidate
+        deg[v] -= 1                  # v is attached and out of the running
+        deg[x] -= 1                  # x used up one of the edges it still needed
     end
 
-    # The sequence is exhausted; exactly two vertices are left, one of which must be n.
-    rest = [u for u in 1:n if !used[u]]
+    # The sequence is exhausted; exactly two vertices still need an edge.
+    rest = findall(==(1), deg)
     length(rest) == 2 || error("not exactly 2 vertices left: this should not happen")
     push!(edges, (rest[1], rest[2]))
 
@@ -145,12 +142,16 @@ image — the validity conditions — is still open; see `reading/Prufer/notes.m
 prufer_encode(tree::HybridNetwork) = prufer_encode(net_to_adj(tree))
 
 
-# TODO Heap optimisation: maintain the candidate leaves in a min-heap, bringing both
-#      encode and decode to O(n log n). Get the naive version working first; record
-#      O(n²) in the comparison table and note that it can be improved.
+# TODO Linear time. Both directions can reach O(n) with a forward-only pointer: after
+#      deleting the smallest leaf v, its neighbour p may become a leaf — if p < v it is
+#      the next one to go, so handle it in place and leave the pointer alone; otherwise
+#      let the pointer reach it. The pointer only ever moves forward, so the scanning is
+#      O(n) amortised over the whole run. This is a classical result, not new work; a
+#      heap is the easier O(n log n) middle ground.
 #
-# TODO Apply this to leaf-labeled trees — the question the project actually needs
-#      answered. Phylogenetic trees have unlabeled internal nodes, so a canonical
-#      labeling is required first; that labeling is not unique, which means the same
-#      tree can yield different sequences and the bijection breaks at that level.
-#      See the last section of reading/Prufer/notes.md.
+# TODO The image on leaf-labeled trees. `net_to_adj` supplies a canonical labeling, so
+#      one tree gives one sequence and `prufer_encode(::HybridNetwork)` is well defined.
+#      What is still open is the other direction: the map is injective but far from
+#      surjective — at n = 6, 105 unrooted binary trees against 10^8 sequences — and no
+#      simple description of the image (the validity conditions) is known. See the last
+#      section of reading/Prufer/notes.md.
